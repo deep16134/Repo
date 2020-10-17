@@ -71,3 +71,8 @@ node {
     stage "s3"
     sh " aws s3 cp /var/lib/jenkins/workspace/asdf/target/*jar s3://vasu2"
     }
+
+aws s3 cp /var/lib/jenkins/workspace/tyuio/target/*.jar s3://vasu2
+
+
+aws s3 cp a.txt s3://vasu2--- to copy a file into s3 bucket
