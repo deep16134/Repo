@@ -59,3 +59,15 @@ server {
         proxy_pass http://3.15.217.3:9000;
     }
 }
+
+
+S3-bucket
+
+node {
+    stage "Create build output"
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '090b8705-028c-41d8-b4e7-9e8ca6fe8c86', url: 'git@ssh.dev.azure.com:v3/deep16134/demo/mvnrepo']]])
+    stage "Build"
+    sh "mvn clean package"
+    stage "s3"
+    sh " aws s3 cp /var/lib/jenkins/workspace/asdf/target/*jar s3://vasu2"
+    }
